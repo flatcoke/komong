@@ -3,8 +3,7 @@ from rest_framework import serializers
 from .models import User
 
 
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(required=True, validators=[])
     email = serializers.EmailField(required=True, validators=[])
