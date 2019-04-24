@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 
 from .models import User
 
@@ -10,6 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     is_staff = serializers.BooleanField(read_only=True)
     email_without_domain = serializers.SerializerMethodField(read_only=True)
+
+    validate_password = make_password
 
     class Meta:
         model = User
