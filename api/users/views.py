@@ -11,6 +11,9 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnly)
 
-    def create(self, *args, **kwargs):
-        self.permission_classes = (AllowAny,)
-        super(UserViewSet, self).create(*args, **kwargs)
+    def get_permissions(self):
+        if self.action in ['create']:
+            permission_classes = [AllowAny, ]
+        else:
+            permission_classes = [IsAuthenticated, ]
+        return [permission() for permission in permission_classes]
