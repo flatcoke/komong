@@ -67,6 +67,6 @@ class User(AbstractBaseUser,
 
     def is_kmong_email(self):
         try:
-            return self.email.split('@')[0] == 'kmong.com'
+            return self.email.split('@')[1] == 'kmong.com'
         except AttributeError:
             return False
